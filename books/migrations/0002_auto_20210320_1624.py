@@ -14,6 +14,13 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='book',
             name='isbn',
-            field=models.CharField(max_length=13, unique=True, validators=[django.core.validators.RegexValidator(message='ISBN has to be 13 character long.', regex='(\\d{12}[0-9X]{1})')], verbose_name='ISBN'),
+            field=models.CharField(
+                max_length=13,
+                unique=True,
+                validators=[
+                    django.core.validators.RegexValidator(
+                        message='ISBN has to be 13 character long.',
+                        regex='(\\d{12}[0-9X]{1})')], verbose_name='ISBN'
+            ),
         ),
     ]

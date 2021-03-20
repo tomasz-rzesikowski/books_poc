@@ -38,7 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'books.apps.BooksConfig'
+    # 3rd party
+    'rest_framework',
+    'django_filters',
+
+    # apps
+    'books.apps.BooksConfig',
+    'api.apps.ApiConfig'
 ]
 
 MIDDLEWARE = [
@@ -140,3 +146,8 @@ CACHES = {
 CACHE_MIDDLEWARE_ALIAS = 'default'
 CACHE_MIDDLEWARE_KEY_PREFIX = ' '
 CACHE_MIDDLEWARE_SECONDS = 500
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny', ),
+    'SEARCH_PARAM': 'q'
+}

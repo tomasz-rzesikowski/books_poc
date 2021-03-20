@@ -31,10 +31,23 @@ class Migration(migrations.Migration):
             name='Book',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('isbn', models.CharField(max_length=13, unique=True, validators=[django.core.validators.RegexValidator(message='ISBN has to be 13 character long.', regex='(\\d{12}[0-9X]{1})')])),
+                ('isbn', models.CharField(
+                    max_length=13,
+                    unique=True,
+                    validators=[
+                        django.core.validators.RegexValidator(
+                            message='ISBN has to be 13 character long.',
+                            regex='(\\d{12}[0-9X]{1})')
+                    ]
+                    )
+                 ),
                 ('title', models.CharField(max_length=255)),
                 ('author', models.ManyToManyField(to='books.Author')),
-                ('publication_language', models.ForeignKey(on_delete=models.SET(books.models.on_language_delete), to='books.publicationlanguage')),
+                ('publication_language', models.ForeignKey(
+                    on_delete=models.SET(books.models.on_language_delete),
+                    to='books.publicationlanguage'
+                    )
+                 ),
             ],
         ),
     ]
