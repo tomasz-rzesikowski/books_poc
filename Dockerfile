@@ -1,6 +1,6 @@
 FROM python:3.9
 
-ENV APP_CODE=/code
+ENV APP_CODE=/usr/src/app
 RUN mkdir $APP_CODE
 WORKDIR $APP_CODE
 
