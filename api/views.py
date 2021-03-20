@@ -6,6 +6,10 @@ from books.models import Book
 
 
 class BookList(generics.ListAPIView):
+    """
+        List books. Search is performed in title, author name and in publication language.
+        Filter is done by publication year.
+    """
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
