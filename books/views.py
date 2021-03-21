@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
 
-from books.models import Book
+from books.models import Book, Author, PublicationLanguage
 
 
 class ListBookView(ListView):
@@ -33,6 +33,23 @@ class ListBookView(ListView):
 class CreateBookView(CreateView):
     model = Book
     template_name = "books/create_book.html"
-    fields = "__all__"
+    fields = ("isbn", "title", "author", "publication_year", "page_count", "cover", "publication_language")
     raise_exception = True
     success_url = reverse_lazy('books:list-books')
+
+
+class CreateAuthorView(CreateView):
+    model = Author
+    template_name = "books/create_author.html"
+    fields = ("name", )
+    raise_exception = True
+    success_url = reverse_lazy('books:create-book')
+
+
+class CreateLanguageView(CreateView):
+    model = PublicationLanguage
+    template_name = "books/create_pub_lang.html"
+    fields = ("language", )
+    raise_exception = True
+    success_url = reverse_lazy('books:create-book')
+

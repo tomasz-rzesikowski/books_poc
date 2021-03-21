@@ -12,7 +12,14 @@
             {% endif %}
 
             {{ form|crispy }}
-            <button class="btn btn-danger float-right btn-lg mb-3 mt-0" type="submit">Create</button>
+
+
+            <button class="btn btn-danger float-right btn-lg mb-3 mt-0" type="submit">Create Book</button>
+            <a class="btn btn-danger float-right btn-lg mb-3 mt-0 ml-1 mr-1" href="{% url 'books:create-pub-lang' %}">Create
+                Language</a>
+            <a class="btn btn-danger float-right btn-lg mb-3 mt-0" href="{% url 'books:create-author' %}">Create
+                Author</a>
+
         </form>
     </div>
 {% endblock %}
