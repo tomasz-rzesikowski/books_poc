@@ -1,0 +1,17 @@
+<div class="card card--adj mb-3">
+    <img class="card-img-top img-size" src="{{ book.cover }}" alt="{{ book.title }}_cover">
+
+    <div class="card-body">
+        <p class="card-title">{{ book.title }}</p>
+        <p class="card-text">
+            {% for author in book.author %}
+                {{ author }}
+                {% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+        <p class="card-text"><small>ISBN: {{ book.isbn }}</small></p>
+        <p class="card-text"><small>Publication language: {{ book.publication_language }}</small></p>
+        <p class="card-text"><small>Publication year: {{ book.publication_year }}</small></p>
+        <p class="card-text"><small>Pages: {{ book.page_count }}</small></p>
+    </div>
+</div>

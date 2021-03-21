@@ -1,9 +1,8 @@
 import requests
 from django.db import IntegrityError
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, FormView
+from django.views.generic import ListView, CreateView, UpdateView
 
-from books.forms import ImportForm
 from books.models import Book, Author, PublicationLanguage
 
 
@@ -30,7 +29,7 @@ class ListBookView(ListView):
 
         if lte:
             object_list = object_list.filter(publication_year__gte=gte, publication_year__lte=lte)
-
+        print(object_list)
         return object_list
 
 
@@ -66,41 +65,46 @@ class CreateLanguageView(CreateView):
     success_url = reverse_lazy('books:create-book')
 
 
-class ImportView(FormView):
-    form_class = ImportForm
+class ListImportView(ListView):
     template_name = "books/import_books.html"
-    success_url = reverse_lazy('books:list-books')
+    context_object_name = "books"
 
-    def form_valid(self, form):
-        import_url = form.cleaned_data["import_url"]
-        self.create_books_from_import(import_url=import_url)
+    def get_queryset(self):
+        query = self.request.GET.get('s')
+        if query:
+            import_url = f"https://www.googleapis.com/books/v1/volumes?q={query}"
+            return self.get_books_from_import(import_url)
+        return []
 
-        return super().form_valid(form)
-
-    def create_books_from_import(self, import_url):
+    @staticmethod
+    def get_books_from_import(import_url):
         imported_data = requests.get(import_url)
 
         books = []
+        imported_books = []
 
         for obj in imported_data.json()["items"]:
-            volume_info = obj["volumeInfo"]
-            industry_identifiers = volume_info["industryIdentifiers"]
+            volume_info = obj.get("volumeInfo", {})
+            if not volume_info:
+                return False
 
-            isbn = ""
+            industry_identifiers = volume_info.get("industryIdentifiers", "")
+
+            isbn = None
             for i in industry_identifiers:
-                if i["type"] == "ISBN_13":
-                    isbn = i["identifier"]
+                if i.get("type") == "ISBN_13":
+                    isbn = i.get("identifier")
 
-            title = volume_info["title"]
+            title = volume_info.get("title", "")
 
             authors = []
-            for a in volume_info["authors"]:
+            for a in volume_info.get("authors", "unknown"):
                 authors.append(Author.objects.get_or_create(name=a)[0])
 
-            publication_year = volume_info["publishedDate"][:4]
-            page_count = volume_info.get("pageCount", "0")
-            cover = volume_info.get("imageLinks", "").get("thumbnail", "")
-            publication_language = volume_info["language"]
+            publication_year = volume_info.get("publishedDate", "")[:4]
+            page_count = volume_info.get("pageCount", 0)
+            cover = volume_info.get("imageLinks", {}).get("thumbnail", "")
+            publication_language = volume_info.get("language", "")
 
             try:
                 book = Book.objects.create(
@@ -116,3 +120,17 @@ class ImportView(FormView):
                 books.append(book)
             except IntegrityError:
                 pass
+
+            imported_book = {
+                "isbn": isbn,
+                "title": title,
+                "authors": authors,
+                "publication_year": publication_year,
+                "page_count": page_count,
+                "cover": cover,
+                "publication_language": publication_language
+            }
+
+            imported_books.append(imported_book)
+
+        return imported_books

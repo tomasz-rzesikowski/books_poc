@@ -4,13 +4,27 @@
 
 {% block content %}
     <div class="col-col-lg-3 col-md-6 mb-4">
-        <form action="{% url 'books:import-books' %}" method="post">
+        <form action="{% url 'books:list-import-books' %}" method="get">
+
+        </form>
+        <form action="{% url 'books:list-import-books' %}" method="get">
             {% csrf_token %}
-            <h3 class="text-center mt-3">Import books from API Google</h3>
+            <h3 class="text-center mt-3">Import books from API Google Books</h3>
+            <input class="form-control mt-2 mb-2" type="search" placeholder="Search" aria-label="Search" name="s"
+                   value="{{ request.GET.s }}">
 
-            {{ form|crispy }}
+            <button class="btn btn-danger float-right btn-lg mb-3 mt-0" type="submit">Search and Import</button>
 
-            <button class="btn btn-danger float-right btn-lg mb-3 mt-0" type="submit">Import Book</button>
         </form>
     </div>
+    {% if books %}
+        <div class="col-col-lg-3">
+            <h2 class="text-center mb-4">Imported books</h2>
+            <div class="card-deck justify-content-center">
+                {% for book in books %}
+                    {% include 'books/partials/_imported_book_card.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

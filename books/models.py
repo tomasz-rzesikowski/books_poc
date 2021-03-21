@@ -7,7 +7,7 @@ def on_language_delete():
 
 
 class Author(models.Model):
-    name = models.CharField(max_length=100, null=False, default=None, unique=True)
+    name = models.CharField(max_length=255, null=False, default=None, unique=True)
 
     def __str__(self):
         return f"{self.name}"

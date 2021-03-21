@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('books', '0001_initial'),
+        ('books', '0001_create_author_lang_book_models'),
     ]
 
     operations = [

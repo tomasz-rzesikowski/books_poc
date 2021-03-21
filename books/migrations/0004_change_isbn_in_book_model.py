@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('books', '0003_auto_20210320_1636'),
+        ('books', '0003_add_page_year_cover_to_book_model'),
     ]
 
     operations = [

@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('books', '0004_auto_20210321_1545'),
+        ('books', '0004_change_isbn_in_book_model'),
     ]
 
     operations = [

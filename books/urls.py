@@ -10,5 +10,5 @@ urlpatterns = [
     path('<int:pk>/', views.UpdateBookView.as_view(), name='update-book'),
     path('create_author/', views.CreateAuthorView.as_view(), name='create-author'),
     path('create_pub_lang/', views.CreateLanguageView.as_view(), name='create-pub-lang'),
-    path('import_books/', views.ImportView.as_view(), name='import-books')
+    path('import_books/', views.ListImportView.as_view(), name='list-import-books'),
 ]
