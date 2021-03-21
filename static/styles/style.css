@@ -7,7 +7,7 @@ body {
   padding: 5px;
 }
 
-.card-deck--adj {
+.card--adj {
   max-width: 255px;
   min-width: 165px;
 }

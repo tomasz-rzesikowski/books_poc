@@ -1,4 +1,4 @@
-<div class="card h-100 card-deck--adj">
+<div class="card card--adj">
     <img class="card-img-top img-size" src="{{ book.cover }}" alt="{{ book.title }}_cover">
 
     <div class="card-body">
@@ -13,9 +13,12 @@
         <p class="card-text"><small>Publication language: {{ book.publication_language }}</small></p>
         <p class="card-text"><small>Publication year: {{ book.publication_year }}</small></p>
         <p class="card-text"><small>Pages: {{ book.page_count }}</small></p>
-        <div class="card-footer">
-        </div>
     </div>
+
+    <div class="card-footer">
+        <a class="btn btn-danger btn-sm m-0" href="{% url 'books:update-book' pk=book.pk %}">Edit</a>
+    </div>
+
 </div>
 
 
