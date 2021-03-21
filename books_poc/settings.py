@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'crispy_forms',
     'extra_views',
+    'requests',
 
     # apps
     'books.apps.BooksConfig',

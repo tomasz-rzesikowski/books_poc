@@ -23,13 +23,13 @@ class PublicationLanguage(models.Model):
 class Book(models.Model):
     isbn = models.CharField(validators=[
         RegexValidator(regex=r"(\d{12}[0-9X]{1})", message="ISBN has to be 13 character long.")
-    ], max_length=13, unique=True, verbose_name="ISBN")
+    ], max_length=13, unique=True, verbose_name="ISBN", null=True)
 
     title = models.CharField(max_length=255, null=False)
     author = models.ManyToManyField("Author")
     publication_year = models.IntegerField(validators=[MinValueValidator(1000), MaxValueValidator(9999)], null=False)
     page_count = models.PositiveIntegerField(null=False)
-    cover = models.URLField()
+    cover = models.URLField(max_length=300, verbose_name="Cover URL")
 
     publication_language = models.ForeignKey(
         "PublicationLanguage",
