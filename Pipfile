@@ -10,6 +10,8 @@ python-memcached = "==1.59"
 djangorestframework = "==3.12.2"
 django-filter = "==2.4.0"
 drf-yasg = "==1.20.0"
+django-crispy-forms = "==1.11.1"
+django-extra-views = "==0.13.0"
 
 [dev-packages]
 

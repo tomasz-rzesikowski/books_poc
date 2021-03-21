@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'drf_yasg',
+    'crispy_forms',
+    'extra_views',
 
     # apps
     'books.apps.BooksConfig',
@@ -153,3 +155,5 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny', ),
     'SEARCH_PARAM': 'q'
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

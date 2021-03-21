@@ -1,9 +1,10 @@
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView
 
 from books.models import Book
 
 
-class BookListView(ListView):
+class ListBookView(ListView):
     model = Book
     template_name = "books/books.html"
     context_object_name = "books"
@@ -27,3 +28,11 @@ class BookListView(ListView):
             object_list = object_list.filter(publication_year__gte=gte, publication_year__lte=lte)
 
         return object_list
+
+
+class CreateBookView(CreateView):
+    model = Book
+    template_name = "books/create_book.html"
+    fields = "__all__"
+    raise_exception = True
+    success_url = reverse_lazy('books:list-books')

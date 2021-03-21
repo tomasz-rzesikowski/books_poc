@@ -4,11 +4,11 @@
     <div class="navbar-collapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url "books:list-books" %}">Add book</a>
+                <a class="nav-link active" aria-current="page" href="{% url "books:create-book" %}">Add book</a>
             </li>
         </ul>
 
-        <form class="form-inline my-2 my-lg-0" method="get">
+        <form class="form-inline my-2 my-lg-0" method="get" action="{% url "books:list-books" %}">
             <input class="form-control mr-sm-2" type="search" placeholder="Publication year from" aria-label="Search" name="gte" value="{{ request.GET.gte }}">
             <input class="form-control mr-sm-2" type="search" placeholder="Publication year to" aria-label="Search" name="lte" value="{{ request.GET.lte }}">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q" value="{{ request.GET.q }}">
