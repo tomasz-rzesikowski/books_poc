@@ -52,4 +52,3 @@ class CreateLanguageView(CreateView):
     fields = ("language", )
     raise_exception = True
     success_url = reverse_lazy('books:create-book')
-
