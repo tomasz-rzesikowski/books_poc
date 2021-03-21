@@ -1,0 +1,18 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="{% url "books:list-books" %}">All books</a>
+
+    <div class="navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url "books:list-books" %}">Add book</a>
+            </li>
+        </ul>
+
+        <form class="form-inline my-2 my-lg-0" method="get">
+            <input class="form-control mr-sm-2" type="search" placeholder="Publication year from" aria-label="Search" name="gte" value="{{ request.GET.gte }}">
+            <input class="form-control mr-sm-2" type="search" placeholder="Publication year to" aria-label="Search" name="lte" value="{{ request.GET.lte }}">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q" value="{{ request.GET.q }}">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Go</button>
+        </form>
+    </div>
+</nav>
