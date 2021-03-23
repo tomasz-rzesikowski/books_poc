@@ -1,0 +1,78 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Libs - very simple library system</title>
+
+    {% block styles %}
+        <link href="{% static "styles/bootstrap.min.css" %}" rel="stylesheet">
+        <link href="{% static "styles/style.css" %}" rel="stylesheet">
+    {% endblock %}
+</head>
+<body class="d-flex flex-column min-vh-100 mb-40">
+
+{% block navigation %}
+    {% include "partials/_nav.html" %}
+{% endblock %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-12  d-flex justify-content-end align-items-center">
+            <form class="d-flex justify-content-end align-items-center" method="get"
+                  action="{% url "books:list-books" %}">
+                <div class="input-group">
+                    <input class="form-control form-control-sm" type="text"
+                           placeholder="Publication year from"
+                           aria-label="Search"
+                           name="gte" value="{{ request.GET.gte }}">
+                    <input class="form-control form-control-sm" type="text"
+                           placeholder="Publication year to"
+                           aria-label="Search"
+                           name="lte" value="{{ request.GET.lte }}">
+                    <input class="form-control form-control-sm" type="text" placeholder="Search"
+                           aria-label="Search"
+                           name="q"
+                           value="{{ request.GET.q }}">
+
+                </div>
+                <button class="btn btn-outline-success btn-sm" type="submit">Find</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<header class="jumbotron my-4">
+    <div class="container">
+        <h2>Libs</h2>
+        <p class="lead">
+            Very simple library system
+            to list and add books to database.
+            Search is performed in title, author name and in publication language.
+            Filter is done by publication year.
+        </p>
+    </div>
+</header>
+
+
+<div class="container wrapper flex-grow-1">
+    <div class="row justify-content-center">
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+
+<footer class="py-5 bg-dark">
+    {% include "partials/_footer.html" %}
+</footer>
+
+{% block scripts %}
+    <script src="{% static "scripts/bootstrap.min.js" %}" async defer></script>
+{% endblock %}
+
+</body>
+</html>

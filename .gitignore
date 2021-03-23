@@ -20,3 +20,7 @@ ENV/
 env.bak/
 venv.bak/
 pythonenv*
+
+# Coverage
+.coverage
+htmlcov
