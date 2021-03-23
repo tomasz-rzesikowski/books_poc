@@ -30,6 +30,12 @@ class ListBookView(ListView):
         object_list = object_list.filter(publication_year__gte=gte, publication_year__lte=lte)
         return object_list
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        get_copy = self.request.GET.copy()
+        context["parameters"] = get_copy.pop('page', True) and get_copy.urlencode()
+        return context
+
 
 class CreateBookView(CreateView):
     model = Book
@@ -79,33 +85,35 @@ class ListImportView(ListView):
         imported_books = []
         for obj in imported_data.json()["items"]:
             imported_id = obj["id"]
-            volume_info = obj.get("volumeInfo", {})
-            if not volume_info:
-                return False
-            industry_identifiers = volume_info.get("industryIdentifiers", "")
-            isbn = None
-            for i in industry_identifiers:
-                if i.get("type") == "ISBN_13":
-                    isbn = i.get("identifier")
-            title = volume_info.get("title", "")
-            authors = []
-            for a in volume_info.get("authors", ""):
-                authors.append(a)
-            publication_year = volume_info.get("publishedDate", "")[:4]
-            page_count = volume_info.get("pageCount", 0)
-            cover = volume_info.get("imageLinks", {}).get("thumbnail", "")
-            publication_language = volume_info.get("language", "")
-            imported_book = {
-                "isbn": isbn,
-                "title": title,
-                "authors": authors,
-                "publication_year": publication_year,
-                "page_count": page_count,
-                "cover": cover,
-                "publication_language": publication_language,
-                "imported_id": imported_id
-            }
-            imported_books.append(imported_book)
+
+            if not Book.objects.filter(imported_id=imported_id):
+                volume_info = obj.get("volumeInfo", {})
+                if not volume_info:
+                    return False
+                industry_identifiers = volume_info.get("industryIdentifiers", "")
+                isbn = None
+                for i in industry_identifiers:
+                    if i.get("type") == "ISBN_13":
+                        isbn = i.get("identifier")
+                title = volume_info.get("title", "")
+                authors = []
+                for a in volume_info.get("authors", ""):
+                    authors.append(a)
+                publication_year = volume_info.get("publishedDate", "")[:4]
+                page_count = volume_info.get("pageCount", 0)
+                cover = volume_info.get("imageLinks", {}).get("thumbnail", "")
+                publication_language = volume_info.get("language", "")
+                imported_book = {
+                    "isbn": isbn,
+                    "title": title,
+                    "authors": authors,
+                    "publication_year": publication_year,
+                    "page_count": page_count,
+                    "cover": cover,
+                    "publication_language": publication_language,
+                    "imported_id": imported_id
+                }
+                imported_books.append(imported_book)
         self.save_imported_books(imported_books)
         return imported_books
 
