@@ -5,3 +5,5 @@ db.sqlite3
 books_poc/settings-heroku.py
 heroku.Dockerfile
 .github
+.coverage
+htmlcov
