@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
 
 from books_poc import settings
 
 urlpatterns = [
+    path('', RedirectView.as_view(pattern_name='books:list-books')),
     path('admin/', admin.site.urls),
     path('books/', include("books.urls")),
     path('v1/', include("api.urls")),

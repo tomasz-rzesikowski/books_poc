@@ -113,18 +113,19 @@ class ListImportView(ListView):
     def save_imported_books(imported_books):
         for imported_book in imported_books:
             try:
+                publication_language = PublicationLanguage.objects.get_or_create(
+                    language=imported_book["publication_language"]
+                )[0]
                 book = Book.objects.create(
                     isbn=imported_book["isbn"],
                     title=imported_book["title"],
                     publication_year=imported_book["publication_year"],
                     page_count=imported_book["page_count"],
                     cover=imported_book["cover"],
+                    publication_language=publication_language,
                     imported_id=imported_book["imported_id"]
                 )
-                publication_language = PublicationLanguage.objects.get_or_create(
-                    language=imported_book["publication_language"]
-                )[0]
-                book.publication_language.set(publication_language)
+
                 authors = []
                 for a in imported_book["authors"]:
                     authors.append(Author.objects.get_or_create(name=a)[0])
