@@ -1,10 +1,10 @@
-{% extends '_base.html' %}
+{% extends "_base.html" %}
 {% load crispy_forms_tags %}
 
 
 {% block content %}
     <div class="col-col-lg-3 col-md-6 mb-4">
-        <form action="{% url 'books:update-book' pk=form.instance.pk %}" method="post">
+        <form action="{% url "books:update-book" pk=form.instance.pk %}" method="post">
             {% csrf_token %}
             <h3 class="text-center mt-3">Add a new Book</h3>
 
