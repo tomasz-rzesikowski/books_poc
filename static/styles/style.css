@@ -11,3 +11,12 @@ body {
   max-width: 255px;
   min-width: 200px;
 }
+
+.logo {
+  width: 2rem;
+  height: 2rem;
+}
+
+.input-group {
+  margin-right: 0.5rem;
+}

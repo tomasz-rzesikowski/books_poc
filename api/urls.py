@@ -4,7 +4,7 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 
-from api.views import BookList
+from api.views import BookList, AuthorList
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -18,5 +18,6 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('authors/<str:name>', AuthorList.as_view()),
     path('books/', BookList.as_view()),
 ]

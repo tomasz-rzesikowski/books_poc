@@ -1,5 +1,9 @@
+{% load static %}
+
 <div class="card card--adj mb-3">
-    <img class="card-img-top img-size" src="{{ book.cover }}" alt="{{ book.title }}_cover">
+    <img class="card-img-top img-size"
+         src="{% if book.cover %}{{ book.cover }}{% else %}{% static 'images/no_cover.png' %}{% endif %}"
+         alt="{{ book.title }}_cover">
 
     <div class="card-body">
         <p class="card-title">{{ book.title }}</p>

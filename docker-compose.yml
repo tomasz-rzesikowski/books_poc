@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.8"
 
 services:
   db:
@@ -21,6 +21,7 @@ services:
       - ./.env
     depends_on:
       - db
+    restart: "on-failure"
 
   cache:
     image: memcached
@@ -33,3 +34,4 @@ services:
 volumes:
   postgres_data:
   static_volume:
+
