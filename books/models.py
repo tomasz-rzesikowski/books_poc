@@ -31,7 +31,7 @@ class Book(models.Model):
     publication_year = models.IntegerField(validators=[MinValueValidator(1000), MaxValueValidator(2025)], null=False)
     page_count = models.PositiveIntegerField(validators=[MaxValueValidator(9999)], null=False)
     cover = models.URLField(max_length=300, verbose_name="Cover URL")
-    imported_id = models.CharField(max_length=255, null=True)
+    imported_id = models.CharField(max_length=255, null=True, unique=True)
 
     publication_language = models.ForeignKey(
         "PublicationLanguage",
