@@ -10,6 +10,7 @@ class ListBookView(ListView):
     model = Book
     template_name = "books/books.html"
     context_object_name = "books"
+    paginate_by = 8
 
     def get_queryset(self):
         query = self.request.GET.get('q')

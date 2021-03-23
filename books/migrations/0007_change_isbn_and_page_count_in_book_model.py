@@ -14,7 +14,13 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='book',
             name='isbn',
-            field=models.CharField(max_length=13, null=True, unique=True, validators=[django.core.validators.RegexValidator(message='ISBN has to consists of 13 numbers or 12 numbers and "X"', regex='(\\d{12}[0-9X]{1})')], verbose_name='ISBN'),
+            field=models.CharField(
+                max_length=13,
+                null=True,
+                unique=True,
+                validators=[django.core.validators.RegexValidator(
+                    message='ISBN has to consists of 13 numbers or 12 numbers and "X"',
+                    regex='(\\d{12}[0-9X]{1})')], verbose_name='ISBN'),
         ),
         migrations.AlterField(
             model_name='book',
