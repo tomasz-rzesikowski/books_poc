@@ -27,7 +27,8 @@ class Book(models.Model):
     ], max_length=13, unique=True, verbose_name="ISBN", null=True)
 
     title = models.CharField(max_length=255, null=False)
-    author = models.ManyToManyField("Author", help_text="If there are no author you are looking for, you can crete it bellow.")
+    author = models.ManyToManyField("Author",
+                                    help_text="If there are no author you are looking for, you can crete it bellow.")
     publication_year = models.IntegerField(validators=[MinValueValidator(1000), MaxValueValidator(2025)], null=False)
     page_count = models.PositiveIntegerField(validators=[MaxValueValidator(9999)], null=False)
     cover = models.URLField(max_length=300, verbose_name="Cover URL")

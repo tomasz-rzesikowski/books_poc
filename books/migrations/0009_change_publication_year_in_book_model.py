@@ -14,6 +14,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='book',
             name='publication_year',
-            field=models.IntegerField(validators=[django.core.validators.MinValueValidator(1000), django.core.validators.MaxValueValidator(2025)]),
+            field=models.IntegerField(validators=[
+                django.core.validators.MinValueValidator(1000),
+                django.core.validators.MaxValueValidator(2025)
+            ]),
         ),
     ]
