@@ -14,11 +14,16 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='book',
             name='author',
-            field=models.ManyToManyField(help_text='If there are no author you are looking for, you can crete it bellow.', to='books.Author'),
+            field=models.ManyToManyField(
+                help_text='If there are no author you are looking for, you can crete it bellow.',
+                to='books.Author'),
         ),
         migrations.AlterField(
             model_name='book',
             name='publication_language',
-            field=models.ForeignKey(help_text='If there are no language you are looking for, you can crete it bellow.', on_delete=models.SET(books.models.on_language_delete), to='books.publicationlanguage'),
+            field=models.ForeignKey(
+                help_text='If there are no language you are looking for, you can crete it bellow.',
+                on_delete=models.SET(books.models.on_language_delete),
+                to='books.publicationlanguage'),
         ),
     ]
