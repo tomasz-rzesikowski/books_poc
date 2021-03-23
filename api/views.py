@@ -1,8 +1,8 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, filters
 
-from api.serializers import BookSerializer, NameSerializer
-from books.models import Book, Author
+from api.serializers import BookSerializer
+from books.models import Book
 
 
 class BookList(generics.ListAPIView):
@@ -19,12 +19,3 @@ class BookList(generics.ListAPIView):
     }
 
     search_fields = ["title", "author__name", "publication_language__language"]
-
-
-class AuthorList(generics.ListAPIView):
-    serializer_class = NameSerializer
-
-    def get_queryset(self):
-        name = self.kwargs.get('name')
-        queryset = Author.objects.filter(name__icontains=name)
-        return queryset

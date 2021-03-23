@@ -1,13 +1,13 @@
-{% extends '_base.html' %}
+{% extends "_base.html" %}
 {% load crispy_forms_tags %}
 
 
 {% block content %}
     <div class="col-col-lg-3 col-md-6 mb-4">
-        <form action="{% url 'books:list-import-books' %}" method="get">
+        <form action="{% url "books:list-import-books" %}" method="get">
             <h3 class="text-center mt-3">Import books from API Google Books</h3>
             <input class="form-control mt-2 mb-2" type="search" placeholder="Search" aria-label="Search" name="s"
-                   value="{{ request.GET.s }}">
+                   required="true" value="{{ request.GET.s }}">
 
             <button class="btn btn-danger float-right btn-lg mb-3 mt-0" type="submit">Search and Import</button>
 
@@ -18,7 +18,7 @@
             <h2 class="text-center mb-4">Imported books</h2>
             <div class="card-deck justify-content-center">
                 {% for book in books %}
-                    {% include 'books/partials/_imported_book_card.html' %}
+                    {% include "books/partials/_imported_book_card.html" %}
                 {% endfor %}
             </div>
         </div>
