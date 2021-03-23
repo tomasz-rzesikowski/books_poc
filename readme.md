@@ -41,10 +41,10 @@ You can check documentation for API [here](https://libs-books.herokuapp.com/v1/s
         <tfoot>
             <tr class="total">
                 <td class="name left">Total</td>
-                <td>398</td>
-                <td>43</td>
+                <td>132</td>
+                <td>41</td>
                 <td>0</td>
-                <td class="right" data-ratio="355 398">89%</td>
+                <td class="right" data-ratio="355 398">88%</td>
             </tr>
         </tfoot>
         <tbody>
