@@ -22,14 +22,16 @@ class PublicationLanguage(models.Model):
 
 class Book(models.Model):
     isbn = models.CharField(validators=[
-        RegexValidator(regex=r"(\d{12}[0-9X]{1})", message="ISBN has to be 13 character long.")
+        RegexValidator(regex=r"(\d{12}[0-9X]{1})",
+                       message="ISBN has to consists of 13 numbers or 12 numbers and \"X\"")
     ], max_length=13, unique=True, verbose_name="ISBN", null=True)
 
     title = models.CharField(max_length=255, null=False)
     author = models.ManyToManyField("Author")
-    publication_year = models.IntegerField(validators=[MinValueValidator(1000), MaxValueValidator(9999)], null=False)
-    page_count = models.PositiveIntegerField(null=False)
+    publication_year = models.IntegerField(validators=[MinValueValidator(1000), MaxValueValidator(2025)], null=False)
+    page_count = models.PositiveIntegerField(validators=[MaxValueValidator(9999)], null=False)
     cover = models.URLField(max_length=300, verbose_name="Cover URL")
+    imported_id = models.CharField(max_length=255, null=True)
 
     publication_language = models.ForeignKey(
         "PublicationLanguage",

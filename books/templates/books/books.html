@@ -3,9 +3,14 @@
 {% block content %}
     <div class="col-col-lg-3">
         <div class="card-deck justify-content-center">
+        {% if books %}
             {% for book in books %}
                 {% include 'books/partials/_book_card.html' %}
             {% endfor %}
+
+        {% else %}
+            <h3 class="text-center mt-3 mb-3">We don't have what you looking for.</h3>
+        {% endif %}
         </div>
     </div>
 {% endblock %}
