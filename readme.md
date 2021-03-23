@@ -28,7 +28,56 @@ You can check documentation for API [here](https://libs-books.herokuapp.com/v1/s
 
 ## Tests (coverage)
 <dl>
-
+    <table class="index">
+        <thead>
+            <tr class="tablehead" title="Click to sort">
+                <th class="name left headerSortDown shortkey_n">Module</th>
+                <th class="shortkey_s">statements</th>
+                <th class="shortkey_m">missing</th>
+                <th class="shortkey_x">excluded</th>
+                <th class="right shortkey_c">coverage</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr class="total">
+                <td class="name left">Total</td>
+                <td>398</td>
+                <td>43</td>
+                <td>0</td>
+                <td class="right" data-ratio="355 398">89%</td>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr class="file">
+                <td class="name left"><a href="api_serializers_py.html">api/serializers.py</a></td>
+                <td>7</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="7 7">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_views_py.html">api/views.py</a></td>
+                <td>10</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="10 10">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="books_models_py.html">books/models.py</a></td>
+                <td>23</td>
+                <td>1</td>
+                <td>0</td>
+                <td class="right" data-ratio="22 23">96%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="books_views_py.html">books/views.py</a></td>
+                <td>92</td>
+                <td>40</td>
+                <td>0</td>
+                <td class="right" data-ratio="52 92">57%</td>
+            </tr>
+        </tbody>
+    </table>
 </dl>
 
 ## Licence
